@@ -1,0 +1,40 @@
+<div class="jumbotron">
+  <h1>Rob's Mac needs your support!</h1>
+  <p>
+  <small>
+  Rob has had very bad time recently. Some evil coffee tried it's chance to ruin Rob's computer! Fortunately,
+  Rob was quick enough to react, and his MacBook suffers insignificantly. However, after that incident, 
+  a battery has died. Rob is taking his chance to replace it on his own - very brave!
+  </small>
+  </p>
+  <p>
+  What Rob's trying to do is very dangerous! Show your support! Sign the form! Let Rob know we CARE!
+  </p>
+
+  <p class="lead text-center">
+  There are already <strong><%= @supporters_count %></strong> supporters. Join us!
+  </p>
+</div>
+
+<%= simple_form_for(@supporter) do |f| %>
+  <%= f.input :name, placeholder: "John Doe" %> 
+  <%= f.input :location, label: "Where are you from?", placeholder: "[optional]" %> 
+  <div class="text-center">
+    <%= f.button :submit, "I want to support Rob's Mac!", { class: "btn-success btn-lg" } %>
+  </div>
+<% end %>
+
+<div>
+  <h3 class="text-right">Recent supporters:</h3>
+  <% @recent_supporters.each do |supporter| %>
+    <blockquote class="blockquote-reverse">
+      <p><%= supporter.name %></p>
+      <footer>
+        <% unless supporter.location.empty? %>
+          <strong><%= supporter.location %></strong> -
+        <% end %>
+        <%= supporter.created_at.strftime("%d %B %y at %I:%M%p") %>
+      </footer>
+    </blockquote>
+  <% end %>
+</div>
